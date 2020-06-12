@@ -1,19 +1,11 @@
-open.account <- function(total) {
-        list(
-                deposit = function(amount) {
-                        if(amount <= 0)
-                                stop("Deposits must be positive!\n")
-                        total <<- total + amount
-                        cat(amount, "deposited.  Your balance is", total, "\n\n")
-                },
-                withdraw = function(amount) {
-                        if(amount > total)
-                                stop("You don't have that much money!\n")
-                        total <<- total - amount
-                        cat(amount, "withdrawn.  Your balance is", total, "\n\n")
-                },
-                balance = function() {
-                        cat("Your balance is", total, "\n\n")
-                }
-        )
+makeCacheMatrix <- function(x = matrix()) {
+  inv <- NULL
+  set <- function(y){
+    x <<- y
+    inv <<- NULL
+  }
+  get <- function() x
+  setInverse <- function(solveMatrix) inv <<- solveMatrix
+  getInverse <- function() inv
+  list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
